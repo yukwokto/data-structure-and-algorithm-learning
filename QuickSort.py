@@ -68,3 +68,48 @@ L = [7, 3, 1, 9]
 quickSort(L, 0, len(L) - 1)
 
 print(L)
+
+############################################################################################################
+# different approach: selecting the last element as the pivot
+
+def partition(arr, left, right):
+    pivot = arr[right]
+    
+    #pointer set up
+    i = left
+    j = right - 1
+    
+    while True:
+        # pointer i movement
+        while arr[i] <= pivot and i <= j:
+            i += 1
+        
+        #pointer j movement
+        while arr[j] >= pivot and i <= j:    
+            j -= 1
+            
+        if i <= j:
+            arr[i], arr[j] = arr[j], arr[i]
+        
+        else:
+            break
+        
+    arr[i], arr[right] = arr[right], arr[i]
+    
+    return i
+            
+def quickSort(arr, left, right):
+    if left >= right:
+        return
+    
+    p = partition(arr, left, right)
+    
+    quickSort(arr, left, p - 1)
+    quickSort(arr, p + 1, right)
+    
+
+L = [1, 5, 3, 12, 56, 13, 78, 4, 2, 5, 90, -13]
+
+quickSort(L, 0 , len(L) - 1)
+
+print(L)
