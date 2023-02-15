@@ -6,6 +6,8 @@ My goal is to learn DSA before the end of 2023.
 
 Log:
 
+Sorting:
+
 -Selection Sort
 
 -Insertion Sort
