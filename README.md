@@ -15,3 +15,5 @@ Log:
 -Quick Sort
 
 -Radix Sort
+
+-Shell Sort (15/2/2023)
