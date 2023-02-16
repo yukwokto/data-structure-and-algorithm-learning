@@ -32,3 +32,43 @@ if __name__ ==  '__main__':
     print(count_sort(L))
     
 # result: [1, 1, 2, 3, 4, 4, 5, 6, 7, 7, 8, 9, 13, 14, 23, 56]
+
+##########################################################################################
+
+# count sort with negative number using dictionary
+
+def negative_count_sort(arr):
+    count_dict = {}
+    
+    for num in arr:
+        if num in count_dict:
+            count_dict.update({num: (occurance := count_dict.get(num)) + 1})
+        else:
+            count_dict.update({num: 1})
+    
+    # sorted the count dictionary by key
+    count_dict = dict(sorted(count_dict.items()))
+    
+    # set up pointer for changing element in the unsorted array
+    i = 0
+    
+    for k, v in count_dict.items():
+        while v > 0:
+            arr[i] = k
+            i += 1
+            v -= 1
+    
+    return arr
+            
+######################################################################################    
+
+# implementation
+if __name__ ==  '__main__':
+
+    Ln = [-4, -3, -2, -12, -13, -5, 4, 2, 12, 4, 6, 7, -5, -5, -5]
+    print(negative_count_sort(Ln))
+
+# result
+# [-13, -12, -5, -5, -5, -5, -4, -3, -2, 2, 4, 4, 6, 7, 12]
+    
+    
