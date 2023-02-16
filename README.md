@@ -19,3 +19,5 @@ Sorting:
 -Radix Sort
 
 -Shell Sort (15/2/2023)
+
+-Count Sort (16/2/2023)
