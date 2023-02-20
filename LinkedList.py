@@ -3,7 +3,8 @@ class Node:
     
     def __init__(self, data, next=None):
         self.data = data
-        self.next = next
+        self.next = None
+        
 
 class LinkedList:
     
@@ -18,27 +19,31 @@ class LinkedList:
     def is_empty(self):
         return self.size == 0
     
-    def add_first(self, data):
+    # insert operation
+    def add_head(self, data):
         new_node = Node(data)
         if self.is_empty():
-            self.head = new_node
             self.tail = new_node
         else:
             new_node.next = self.head
-            self.head = new_node
+        self.head = new_node
         self.size += 1
-        
-    def insert_at(self, data, position):
+    
+    def insert_at(self, data, pos):
+        if pos == 1:
+            self.add_head(data)
+            return
         new_node = Node(data)
-        idx = 1
         p = self.head
-        while idx < position - 1:
+        idx = 1
+        while idx < pos - 1:
             p = p.next
             idx += 1
         new_node.next = p.next
         p.next = new_node
         self.size += 1
         
+    
     def add_last(self, data):
         new_node = Node(data)
         if self.is_empty():
@@ -48,7 +53,8 @@ class LinkedList:
         self.tail = new_node
         self.size += 1
     
-    def remove_first(self):
+    # delete opeartion
+    def delete_head(self):
         if self.is_empty():
             print('The linked list is empty.')
             return
@@ -60,67 +66,73 @@ class LinkedList:
             self.tail = None
         self.size -= 1
         return e
-        
-    def remove_last(self):
+    
+    def delete_at(self, pos):
         if self.is_empty():
             print('The linked list is empty.')
-        p = self.head
-        idx = 1
-        while idx < len(self) - 1:
-            p = p.next
-            idx += 1
-        self.tail = p
-        e = p.next.data
-        self.tail.next = None
-        self.size -= 1
-        return e
-    
-    def remove_at(self, position):
-        if position == 1:
-            self.remove_first()
+            return
+        if pos == 1:
+            self.delete_head()
             return
         p = self.head
         idx = 1
-        while idx < position - 1:
+        while idx < pos - 1:
             p = p.next
             idx += 1
         e = p.next.data
         p.next = p.next.next
         self.size -= 1
         return e
-            
+        
+    def delete_tail(self):
+        if self.is_empty():
+            print('The linked list is empty.')
+            return
+        if self.size == 1:
+            self.delete_head()
+            return
+        
+        p = self.head
+        idx = 1
+        while idx < len(self) - 1:
+            p = p.next
+            idx += 1
+        e = p.next.data
+        self.tail = p
+        self.tail.next = None
+        self.size -= 1
+        return e
+    
     def search(self, key):
         p = self.head
         idx = 1
         while p:
             if p.data == key:
                 return idx
-            else:
-                p = p.next
-                idx += 1
+            p = p.next
+            idx += 1
         return -1
-    
+        
     def display(self):
-        show = '['
+        if self.is_empty():
+            print('[]')
+            return
+        shown = '['
         p = self.head
         while p:
-            show += f'{p.data},'
+            shown += f'{p.data},'
             p = p.next
-        show = show[:-1] + ']'
-        print(show)
-
+        shown = shown[:-1]+']'
+        print(shown)
+        
 if __name__ == '__main__':
     LL = LinkedList()
-    LL.add_last('a')
-    LL.add_last('b')
-    LL.add_last('c')
-    LL.add_last('d')
-    LL.add_last('e')
-    LL.add_last('f')
-    LL.add_first('first')
-    LL.insert_at(12, 4)
-    LL.add_last('last')
-    LL.remove_first()
-    LL.remove_last()
-    LL.remove_at(2)
+    LL.add_last(1)
+    LL.add_last(2)
+    LL.add_last(3)
+    LL.add_last(4)
+    LL.add_last(5)
+    LL.add_last(6)
+    LL.add_last(7)
+    LL.delete_at(1)
     LL.display()
