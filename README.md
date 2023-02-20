@@ -21,3 +21,5 @@ Sorting:
 -Shell Sort (15/2/2023)
 
 -Count Sort (16/2/2023)
+
+-Linked List (19/2/2023)
